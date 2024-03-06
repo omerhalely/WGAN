@@ -7,8 +7,8 @@ class LinearBlock(nn.Module):
         super().__init__()
         self.linear_block = nn.Sequential(
             nn.Linear(in_dim, out_dim),
-            nn.BatchNorm1d(out_dim),
-            nn.ReLU(),
+            nn.BatchNorm1d(out_dim, 0.8),
+            nn.LeakyReLU(0.2, inplace=True),
         )
 
     def forward(self, x):
@@ -39,12 +39,10 @@ class Critic(nn.Module):
     def __init__(self, in_dim):
         super().__init__()
         self.model = nn.Sequential(
-            nn.Linear(in_dim[0] * in_dim[1] * in_dim[2], 1024),
-            nn.ReLU(),
-            nn.Linear(1024, 512),
-            nn.ReLU(),
+            nn.Linear(in_dim[0] * in_dim[1] * in_dim[2], 512),
+            nn.LeakyReLU(0.2, inplace=True),
             nn.Linear(512, 256),
-            nn.ReLU(),
+            nn.LeakyReLU(0.2, inplace=True),
             nn.Linear(256, 1),
         )
 
@@ -52,6 +50,17 @@ class Critic(nn.Module):
         x = torch.flatten(x, 1)
         x = self.model(x)
         return x
+
+
+# class ResidualBlock(nn.Module):
+#     def __init__(self, z_dim):
+#         super().__init__()
+#         self.linear = nn.Sequential(
+#             nn.Linear()
+#         )
+#         self.model = nn.Sequential(
+#
+#         )
 
 
 if __name__ == "__main__":
