@@ -7,7 +7,7 @@ import os
 
 
 def load_data(data_type):
-    if not os.path.exists(os.path.join(os.getcwd(), "data", data_type)):
+    if not os.path.exists(os.path.join(os.getcwd(), "data")):
         os.mkdir(os.path.join(os.getcwd(), "data"))
 
     if not os.path.exists(os.path.join(os.getcwd(), "data", data_type)):

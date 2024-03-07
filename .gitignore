@@ -1,5 +1,6 @@
 *.pt
 *.log
+*.png
 *.pkl
 data
 runs
