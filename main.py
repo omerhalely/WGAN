@@ -39,7 +39,7 @@ parser.add_argument(
     "--train",
     type=bool,
     help="If set to True, model will be trained, otherwise, model will be tested. Default - True",
-    default=True,
+    default=False,
 )
 
 

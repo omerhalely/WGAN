@@ -18,16 +18,12 @@ def load_data(data_type):
     if data_type == "CIFAR10":
         train_dataset = datasets.CIFAR10("./data/CIFAR10/train", train=True, download=True,
                                          transform=transforms.ToTensor())
-        test_dataset = datasets.CIFAR10("./data/CIFAR10/test", train=False, download=True,
-                                        transform=transforms.ToTensor())
-        return train_dataset, test_dataset
+        return train_dataset
 
     if data_type == "FashionMNIST":
         train_dataset = datasets.FashionMNIST("./data/CIFAR10/train", train=True, download=True,
                                               transform=transforms.ToTensor())
-        test_dataset = datasets.FashionMNIST("./data/CIFAR10/test", train=True, download=True,
-                                             transform=transforms.ToTensor())
-        return train_dataset, test_dataset
+        return train_dataset
 
 
 def compute_gradient_loss(critic, real_image, fake_image, device):

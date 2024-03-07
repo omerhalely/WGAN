@@ -43,7 +43,7 @@ class Handler:
         self.epochs = epochs
         self.writer = SummaryWriter(f"runs/{self.model_name}")
 
-        self.train_dataset, self.test_dataset = load_data(self.data_type)
+        self.train_dataset = load_data(self.data_type)
 
         self.generator_optimizer = optim.Adam(self.generator.parameters(), lr=lr, betas=(beta1, beta2))
         self.discriminator_optimizer = optim.Adam(self.discriminator.parameters(), lr=lr, betas=(beta1, beta2))
@@ -118,6 +118,7 @@ class Handler:
         return average_discriminator_loss, average_generator_loss
 
     def train(self):
+        print(f"Start Training {self.model_name}")
         print(f"Training Model on {self.device}")
 
         if not os.path.exists(os.path.join(os.getcwd(), "models")):
@@ -167,7 +168,8 @@ class Handler:
         z = torch.randn(self.batch_size, self.z_dim).to(self.device)
 
         fake_images = self.generator(z)
-        img_grid = torchvision.utils.make_grid(fake_images.cpu().detach())
+        img_grid = 255 * torchvision.utils.make_grid(fake_images.cpu().detach())
+        img_grid = img_grid.to(torch.uint8)
         plt.imshow(torch.permute(img_grid, (1, 2, 0)))
         plt.savefig(filename)
         plt.close()
