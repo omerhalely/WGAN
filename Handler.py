@@ -149,7 +149,6 @@ class Handler:
                   f"Generator Loss {generator_loss:.2f} | ")
 
         print(70 * "-")
-        save_images(self.generator, self.z_dim, self.writer, self.epochs + 1, self.device)
 
     def load_model(self):
         print(f"Loading model {self.model_name}...")
@@ -168,8 +167,7 @@ class Handler:
         z = torch.randn(self.batch_size, self.z_dim).to(self.device)
 
         fake_images = self.generator(z)
-        img_grid = 255 * torchvision.utils.make_grid(fake_images.cpu().detach())
-        img_grid = img_grid.to(torch.uint8)
+        img_grid = torchvision.utils.make_grid(fake_images.cpu().detach())
         plt.imshow(torch.permute(img_grid, (1, 2, 0)))
         plt.savefig(filename)
         plt.close()
