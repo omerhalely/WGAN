@@ -11,10 +11,10 @@ python main.py --model "WGAN" --model-name "WGAN_FashionMNIST" --data "FashionMN
 
 # Training DCGAN on CIFAR10 dataset.
 python main.py --model "DCGAN" --model-name "DCGAN_CIFAR10" --data "CIFAR10" --epochs 30 --train True
-# Testing WGAN_CIFAR10.
+# Testing DCGAN_CIFAR10.
 python main.py --model "DCGAN" --model-name "DCGAN_CIFAR10" --data "CIFAR10"
 
-# Training WGAN on FashionMNIST dataset.
+# Training DCGAN on FashionMNIST dataset.
 python main.py --model "DCGAN" --model-name "DCGAN_FashionMNIST" --data "FashionMNIST" --epochs 30 --train True
-# Testing WGAN_FashionMNIST.
+# Testing DCGAN_FashionMNIST.
 python main.py --model "DCGAN" --model-name "DCGAN_FashionMNIST" --data "FashionMNIST"
