@@ -1,7 +1,6 @@
 import torch
 import torchvision
 import torchvision.transforms as transforms
-from torch.utils.data import DataLoader
 from torchvision import datasets
 import os
 
@@ -10,19 +9,12 @@ def load_data(data_type):
     if not os.path.exists(os.path.join(os.getcwd(), "data")):
         os.mkdir(os.path.join(os.getcwd(), "data"))
 
-    if not os.path.exists(os.path.join(os.getcwd(), "data", data_type)):
-        os.mkdir(os.path.join(os.getcwd(), "data", data_type))
-        os.mkdir(os.path.join(os.getcwd(), "data", data_type, "train"))
-        os.mkdir(os.path.join(os.getcwd(), "data", data_type, "test"))
-
     if data_type == "CIFAR10":
-        train_dataset = datasets.CIFAR10("./data/CIFAR10/train", train=True, download=True,
-                                         transform=transforms.ToTensor())
+        train_dataset = datasets.CIFAR10("./data", train=True, download=True, transform=transforms.ToTensor())
         return train_dataset
 
     if data_type == "FashionMNIST":
-        train_dataset = datasets.FashionMNIST("./data/CIFAR10/train", train=True, download=True,
-                                              transform=transforms.ToTensor())
+        train_dataset = datasets.FashionMNIST("./data", train=True, download=True, transform=transforms.ToTensor())
         return train_dataset
 
 
@@ -48,3 +40,6 @@ def save_images(generator, z_dim, writer, epoch, device):
     img_grid = torchvision.utils.make_grid(fake_images)
     writer.add_image(f"Fake Images | Epoch {epoch}", img_grid)
 
+
+load_data("FashionMNIST")
+load_data("CIFAR10")
